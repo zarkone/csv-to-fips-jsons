@@ -1,0 +1,21 @@
+on:
+  schedule:
+    - cron:  '*/55 * * * *'
+  push:
+jobs:
+  jsons:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: (Re)Write jsons
+      run: ./run
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add total.csv
+        git commit -m "Update jsons" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
