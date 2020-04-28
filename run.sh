@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-today=`date +'%m-%d-%Y'`
+today=`date +'%m-%d-%Y' --date="yesterday"`
 
 curl -s https://raw.githubusercontent.com/borkdude/babashka/master/install -o install-babashka
 chmod +x install-babashka && sudo ./install-babashka
