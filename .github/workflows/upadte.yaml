@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: (Re)Write jsons
-      run: ./run
+      run: ./run.sh
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
