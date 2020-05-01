@@ -15,8 +15,7 @@
          (reduce (fn [res k]
                    (update res k #(try
                                     (Long/parseLong %)
-                                    (catch Exception e
-                                      (:Combined_Key res)))))
+                                    (catch Exception _ %))))
                  csv-record
                  [:FIPS
                   :Deaths
@@ -30,7 +29,10 @@
     (println "CSV has " (count csv-maps) "records.")
     (doseq [csv-map csv-maps]
       (let [fips (:FIPS csv-map)
-            json-filename (format "./out/%05d.json" fips)]
+            combined-key (:Combined_Key csv-map)
+            json-filename (if (int? fips)
+                            (format "./out/%05d.json" fips)
+                            (format "./out/%s.json" combined-key))]
         (println "Writing " json-filename )
         (->> csv-map
              (cheshire/generate-string)
