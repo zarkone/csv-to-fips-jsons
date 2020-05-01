@@ -30,7 +30,7 @@
     (println "CSV has " (count csv-maps) "records.")
     (doseq [csv-map csv-maps]
       (let [fips (:FIPS csv-map)
-            json-filename (str "./out/" fips ".json")]
+            json-filename (format "./out/%05d.json" fips)]
         (println "Writing " json-filename )
         (->> csv-map
              (cheshire/generate-string)
