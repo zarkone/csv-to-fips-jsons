@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '*/55 * * * *'
+    - cron:  '* 23 * * *'
   push:
 jobs:
   jsons:
